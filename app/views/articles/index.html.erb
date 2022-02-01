@@ -1,25 +1,32 @@
-<p>Article listing page</p>
+<div id="page-content"> 
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th colspan="3">Actions</th>
-        </tr>
-    </thead>
+    <h3 class="text-center mt-4">Listing all Articles</h3>
 
-    <tbody>
-    <% @articles.each do |article| %>
-        <tr>
-            <td><%= article.title %></td>
-            <td><%= article.description %></td>
-            <td><%= link_to 'Show', article_path(article.id) %></td>
-            <td><%= link_to 'Edit', edit_article_path(article.id) %></td>
-            <td><%= link_to 'Delete', article_path(article.id), method: :delete, data: {confirm: "Are You sure?" } %></td>
-        </tr>
-    <% end %>
-    </tbody>
-</table>
+    <div class="container">
+        <div class="row justify-content-md-center">
 
-<p><%= link_to 'Create new article', new_article_path %></p>
+        <% @articles.each do |article| %>
+        <div class="col-sm-6 mt-4">
+        <div class="card text-center shadow p-1 mb-5 bg-body rounded">
+        <div class="card-header fst-italic">
+            By Mansi Varshney
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
+            <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+            <%= link_to "View", article_path(article), class: "btn btn-outline-success" %> 
+            <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %> 
+            <%= link_to "Delete", article_path(article), class: "btn btn-outline-danger" %> 
+        </div>
+        <div class="card-footer text-muted">
+            <small>Created <%= time_ago_in_words(article.created_at) %> ago, 
+            edited <%= time_ago_in_words(article.updated_at) %> </small>
+        </div>
+        </div>
+        </div>
+        <% end %>
+
+        </div>
+    </div>
+
+</div>
